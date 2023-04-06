@@ -3,7 +3,7 @@
 // of a given string. ‘karakis’, ‘baerren’, ‘kajak’, ‘inni’,’sedes’.
 
 const sample = "emadamee";
-class palindromeFinder {
+class PalindromeFinder {
   constructor(inputString) {
     this.inputString = inputString;
   }
