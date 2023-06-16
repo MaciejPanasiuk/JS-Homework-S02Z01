@@ -1,7 +1,7 @@
 //create a board Z by Y with random pairs of values, populate it with 0s or Xs
 //XxY we have number of tiles, /2 we have number of values that we need to pick at random exacly XxY/2 times.Then add it 2 times at random to the memoBoard
 
-// import _ from "lodash";
+
 import pkg from "lodash";
 const { uniqueId } = pkg;
 

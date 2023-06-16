@@ -90,7 +90,7 @@ class MemoryGame {
   }
   matchCheck(pickedTile, currentPlayer) {
     const isMatch = currentPlayer.playerMemory.find((tile) => {
-      tile.symbol === pickedTile.symbol && tile.isRevealed === true;
+      return tile.symbol === pickedTile.symbol && tile.isRevealed === true;
     });
 
     if (isMatch) {
@@ -137,7 +137,3 @@ console.log(newGame.players);
 // newGame.updateBoardifMatch(newGame.board[0]);
 // newGame.updatePlayersMemoryifMatch(newGame.board[0]);
 newGame.playerTurn();
-console.log(newGame.board);
-console.log(newGame.players);
-// // console.log(newGame.revealRandomTile())
-console.log("a");
