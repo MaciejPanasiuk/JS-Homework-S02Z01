@@ -56,7 +56,12 @@ const checkNetwork = function (NetworkInput) {
     if (connection[0] === "T") {
       console.log(`----testing path between ${connection[1]} and ${connection[2]}-----`);
       if (doesIPExist(connection[1]) && doesIPExist(connection[2])) {
-        TestForRoute(connection[1], connection[2]);
+        if(TestForRoute(connection[1], connection[2])){
+          console.log(`Route between ${connection[1]} and ${connection[2]}  exists`);
+        }
+        else{
+          console.log(`Route between ${connection[1]} and ${connection[2]} doesnt exists`)
+        }
       } else {
         console.log(`Route between ${connection[1]} and ${connection[2]} doesnt exist`);
       }
@@ -95,14 +100,14 @@ const TestForRoute = function (startIP, endIP) {
         queue.push(connection);
       }
       if (connection === endIP) {
-        console.log(`Route between ${startIP} and ${endIP}  exists`);
         isFound=true;
-        queue.length=0
+        // queue.length=0
+        return true;
       }
     }
   }
   if(!isFound){
-    console.log(`Route between ${startIP} and ${endIP} doesnt exist`)
+    return false;
   }
 };
 checkNetwork(Network);
