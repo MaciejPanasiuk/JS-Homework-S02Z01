@@ -6,29 +6,8 @@
 //  the connection exists and providing information as true or false. The last two elements are two IP addresses: the start IP and the
 //  end IP.
 
-// [
 
-//     "B 100.100.100.1 100.100.100.2",
-
-//     "B 100.100.100.1 100.100.100.3",
-
-//     "B 100.100.100.10 100.100.100.11",
-
-//     "T 100.100.100.1 100.100.100.3",
-
-//     "T 100.100.100.10 100.100.100.2",
-
-//     "T 100.100.100.10 100.100.100.11",
-
-//     "B 100.100.100.11 100.100.100.2",
-
-//     "T 100.100.100.10 100.100.100.3",
-
-//     "T 100.100.100.100 100.100.100.103",
-
-//   ]
-
-const Network = [
+const NetworkAndTasks = [
   "B 100.100.100.1 100.100.100.2",
 
   "B 100.100.100.1 100.100.100.3",
@@ -49,7 +28,7 @@ const Network = [
 ];
 const networkGraph = new Map();
 
-const checkNetwork = function (NetworkInput) {
+const runNetworkTasks = function (NetworkInput) {
   const nestedNetwork = NetworkInput.map((item) => item.split(" "));
   nestedNetwork.forEach((connection,index) => {
     console.log(`action ${index+1}:`)
@@ -72,22 +51,22 @@ const checkNetwork = function (NetworkInput) {
     }
   });
 };
-const addNode = function (start, finish) {
-  if (!doesIPExist(start)) {
-    networkGraph.set(start, []);
+const addNode = function (startIP, finishIP) {
+  if (!doesIPExist(startIP)) {
+    networkGraph.set(startIP, []);
   }
-  if (!doesIPExist(finish)) {
-    networkGraph.set(finish, []);
+  if (!doesIPExist(finishIP)) {
+    networkGraph.set(finishIP, []);
   }
 };
-const addEdge = function (start, finish) {
-  networkGraph.get(start).push(finish);
-  networkGraph.get(finish).push(start);
+const addEdge = function (startIP, finishIP) {
+  networkGraph.get(startIP).push(finishIP);
+  networkGraph.get(finishIP).push(startIP);
 };
 const doesIPExist = function (Adress) {
   return networkGraph.has(Adress);
 };
-const TestForRoute = function (startIP, endIP) {
+const TestForRoute = function (startIP, finishIP) {
   const visitedAdresses=new Set();
   let isFound=false;
   const queue = [startIP];
@@ -99,7 +78,7 @@ const TestForRoute = function (startIP, endIP) {
         visitedAdresses.add(connection)
         queue.push(connection);
       }
-      if (connection === endIP) {
+      if (connection === finishIP) {
         isFound=true;
         // queue.length=0
         return true;
@@ -110,5 +89,4 @@ const TestForRoute = function (startIP, endIP) {
     return false;
   }
 };
-checkNetwork(Network);
-console.log(`Connections`);
+runNetworkTasks(NetworkAndTasks);
